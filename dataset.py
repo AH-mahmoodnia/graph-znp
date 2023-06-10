@@ -1,4 +1,5 @@
 import math
+import sys
 class Dataset:
     def __init__(self, size, dimensionality):
         self.size = size
@@ -34,6 +35,18 @@ class Dataset:
     def dump_vector(self, idx):
         v = get_vector(idx)
         print(v)
+
+    def distance(self, p1, p2):
+        ret = 0
+        if g_option.distance_type == 0:
+            ret = minkowskiDist(p1, p2, self.dimensionality, 2)
+        elif g_option.distance_type == 1:
+            ret = minkowskiDist(p1, p2, self.dimensionality, g_option.minkowski_p)
+        else:
+            sys.exit(1)
+        return ret
+
+
 
 # p1_idx, p2_idx: points that we measure the distance between them
 # D: number of features, p: minkowski param 

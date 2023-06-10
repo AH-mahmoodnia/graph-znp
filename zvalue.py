@@ -1,7 +1,6 @@
 def generate_lookup_table(dimensions):
-    if dimensions < 32:
-        limit = dimensions
-    else:
+    limit = 2048 // dimentions
+    if limit > 32:
         limit = 32
     lookup_table = [[0]*256]*dimensions
     for i in range(dimensions):
