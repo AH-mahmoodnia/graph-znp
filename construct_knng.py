@@ -105,3 +105,35 @@ def debug_zindex(data, zindex, head):
     data_i = 0
     while data_i < data.size and data_i < head:
         print(zindex[data_i])
+
+def sliding_window_search(data, knng, zindex, window_width):
+    update_count = 0
+    for data_i in range(data.size - window_width):
+        for w in range(window_width):
+            update_count += update(knng, data, zindex[data_i], zindex[data_i+w])
+            g_dist_count++
+
+    return update_count
+
+def z_search(data, knng, num_curves, K, window_width, z_dimensions):
+    lookup_table = generate_lookup_table(z_dimensions)
+    precision = calc_precision(data.dimensionality, z_dimensions, data.elem_min, data.elem_max, 1.1)
+    zindex [0] * data.size
+    projDS = data
+    update_count = 0
+    update_count_nndes = 0
+    update_portion = 0
+    update_portion_nndes = 0
+    randpoints 
+    new_knn = [[]] * data.size
+    old_knn = [[]] * data.size
+    print(f'min: {data.elem_min}, max: {data.elem_max}, precision: {precision}')
+    print("Start generate rand projection points")
+    # the heterogenous_rand_points is not yet written
+    if g_options.randp_distance_project > 0:
+        # rp = generate_heterogenous_rand_points(data, 500, 100)
+    print("End generate rand projection points")
+    randpoints = rp
+    proj_dim = z_dimensions
+    nndes_start_k = 
+
