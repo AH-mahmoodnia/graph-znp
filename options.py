@@ -4,6 +4,3 @@ class Options:
 
     def set_minkowski_p(self, p):
         self.minkowski_p = p
-
-
-g_option = Options()
