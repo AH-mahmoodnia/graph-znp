@@ -1,16 +1,14 @@
 import sys
 
 
-# TODO: why data is not in constructor?
-# TODO: strings and string?
+# TODO: lshit
 class Dataset:
     # constructor <changed!>
     def __init__(self, size, dimensionality):
         self.size = size
         self.dimensionality = dimensionality
         self.data = [[0] * self.dimensionality] * self.size
-        self.strings = ""
-        self.string = None
+        self.strings = []
         self.elem_min = 0
         self.elem_max = 0
 

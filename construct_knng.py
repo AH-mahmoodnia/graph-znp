@@ -2,7 +2,7 @@ import sys
 import random
 import numpy as np
 from globals import *
-from dataset import Dataset
+from zvalue import *
 
 
 def project_sjs(
@@ -77,8 +77,8 @@ def generate_z_index(data, z_dimensions, lookup_table, zindex, precision):
         rand_vector[i_dim] = random.random() * g_rand_scale
 
     for data_i in range(data.size):
-        v = Dataset.get_vector(data, data_i)
-        fp = np.zeros(data.dimensionality).tolist()
+        v = data.get_vector(data_i)
+        P = np.zeros(data.dimensionality).tolist()
         project_sjs(
             data,
             v,
@@ -91,3 +91,17 @@ def generate_z_index(data, z_dimensions, lookup_table, zindex, precision):
             precision,
         )
         # Generate Z-value for P
+        zindex_tmp[data_i] = (data_i, z_value(lookup_table, P, z_dimensions))
+
+    print("START Z-value based sorting")
+    zindex_tmp.sort(lambda x, y: y)
+    print("END Z-value based sorting")
+
+    for data_i in range(len(zindex_tmp)):
+        zindex[data_i] = zindex_tmp[data_i][0]
+
+
+def debug_zindex(data, zindex, head):
+    data_i = 0
+    while data_i < data.size and data_i < head:
+        print(zindex[data_i])
