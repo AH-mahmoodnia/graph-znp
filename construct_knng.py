@@ -77,8 +77,8 @@ def generate_z_index(data, z_dimensions, lookup_table, zindex, precision):
         rand_vector[i_dim] = random.random() * g_rand_scale
 
     for data_i in range(data.size):
-        v = Dataset.get_vector(data, data_i)
-        fp = np.zeros(data.dimensionality).tolist()
+        v = data.get_vector(data_i)
+        P = np.zeros(data.dimensionality).tolist()
         project_sjs(
             data,
             v,
