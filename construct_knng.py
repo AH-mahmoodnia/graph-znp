@@ -156,6 +156,35 @@ def z_search(data, knng, num_curves, K, window_width, z_dimensions):
             proj_dim = g_options.randp_distance_project
             projDS = randp_distance_project(knng, data, projDS, i_curve, randpoints, proj_dim)
             projDS.find_min_max()
+        if g_options.randp_distance_project > 0:
+            stat = [None]*proj_dim
+            for i in range(proj_dim):
+                stat[i] = Stat()
+
+            for i_dim in range(proj_dim):
+                i_data = 0
+                while i_data < projDS.size:
+                    val = projDs.get_val(i_data, i_dim)
+                    stat[i_dim].push_stat(val)
+                    i_data+=1
+            for i_dim in range(proj_dim):
+                print(f"dim: {i_dim}")
+                stat[i_dim].debug_stat()
+
+            for i_dim in range(proj_dim):
+                if stat[i_dim].mean < -0.2 || stat[i_dim].mean > 0.2:
+                    print(f"Mean center data for dim: {i_dim}")
+                    projDS.mean_center_data(stat[i_dim], i_dim)
+
+            projDS.find_min_max()
+
+            generate_z_index(projDS, proj_dim, lookup_table, zindex, precision)
+            debug_zindex(projDS, zindex)
+
+            update_count = sliding_window_search(data, knng, zindex, window_width)
+            update_portion = update_count / (data.size * knng.k)
+            print(f"Z-order update count: {update_count}, {update_portion}")
+
 
         i_curve+=1
 
