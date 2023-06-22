@@ -3,6 +3,7 @@ import random
 import numpy as np
 from globals import *
 from zvalue import *
+import datetime
 
 
 def project_sjs(
@@ -135,5 +136,37 @@ def z_search(data, knng, num_curves, K, window_width, z_dimensions):
     print("End generate rand projection points")
     randpoints = rp
     proj_dim = z_dimensions
-    nndes_start_k = 
+    nndes_start_k = g_options.recall_K
+    nndes_max_k = K
+    nndes_k = nndes_start_k
+    run_nndes = 0
+    k_increment = 2
+
+    if g_options.nndes_k > 0:
+        nndes_max_k = nndes_k = g_options.nndes_k
+
+    projDS.find_min_max()
+
+    i_curve = 0
+    while True:
+        print("="*50)
+        print(f"START iteration={i_curve+1} time={datetime.datetime.now()}")
+        if g_options.randp_distance_project > 0:
+            print("randp_distance_project")
+            proj_dim = g_options.randp_distance_project
+            projDS = randp_distance_project(knng, data, projDS, i_curve, randpoints, proj_dim)
+            projDS.find_min_max()
+
+        i_curve+=1
+
+
+
+
+
+
+
+
+
+
+
 

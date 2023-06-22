@@ -7,3 +7,6 @@ class Options:
     
     def set_randp_distance_project(self, randp_distance_project):
         self.randp_distance_project = randp_distance_project
+
+    def set_recall_K(self, recall_K):
+        self.recall_K = recall_K
